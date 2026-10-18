@@ -1,0 +1,194 @@
+{
+  "project": {
+    "name": "Celestial Birth Atlas",
+    "artifact": "planning-handoff",
+    "target": "single-page HTML + JavaScript browser application",
+    "implementation_included": false,
+    "plan_version": "1.0"
+  },
+  "product_goal": "Personalized 3D natal chart, local birth sky and traditional planetary/fixed-star relationship exploration",
+  "modes": [
+    {
+      "id": "natal-wheel",
+      "name": "Natal Constellation Wheel",
+      "reference": "symbolic astrological chart"
+    },
+    {
+      "id": "birth-sky",
+      "name": "Birth Sky Observatory",
+      "reference": "local observational sky"
+    },
+    {
+      "id": "connection-network",
+      "name": "Cosmic Connection Network",
+      "reference": "rule-defined semantic graph"
+    }
+  ],
+  "engines": [
+    {
+      "id": "birth-data",
+      "name": "Birth Data Engine",
+      "inputs": [
+        "date",
+        "local birth time",
+        "birth place or coordinates",
+        "time zone and uncertainty"
+      ],
+      "outputs": [
+        "resolved instant",
+        "geographic coordinates",
+        "birth metadata"
+      ]
+    },
+    {
+      "id": "astronomy",
+      "name": "Astronomical Engine",
+      "inputs": [
+        "resolved instant",
+        "coordinates"
+      ],
+      "outputs": [
+        "planetary positions",
+        "celestial coordinates",
+        "coordinate reference metadata"
+      ],
+      "candidates": [
+        "Astronomy Engine",
+        "Swiss Ephemeris subject to license review"
+      ]
+    },
+    {
+      "id": "astrology",
+      "name": "Astrology Engine",
+      "inputs": [
+        "planetary positions",
+        "birth context",
+        "zodiac and house settings"
+      ],
+      "outputs": [
+        "natal placements",
+        "houses",
+        "angles",
+        "major aspects"
+      ]
+    },
+    {
+      "id": "fixed-stars",
+      "name": "Fixed-Star Engine",
+      "inputs": [
+        "reference date",
+        "curated star catalogue",
+        "traditional association rules"
+      ],
+      "outputs": [
+        "star positions",
+        "constellation data",
+        "fixed-star associations"
+      ]
+    },
+    {
+      "id": "3d-renderer",
+      "name": "3D Universe Engine",
+      "inputs": [
+        "celestial positions",
+        "natal placements",
+        "relationship graph",
+        "view and selection state"
+      ],
+      "outputs": [
+        "interactive celestial scene"
+      ],
+      "candidate": "Three.js"
+    },
+    {
+      "id": "correlations",
+      "name": "Correlation Engine",
+      "inputs": [
+        "natal chart",
+        "star data",
+        "aspect/orb rules"
+      ],
+      "outputs": [
+        "typed rule-defined relationship graph"
+      ]
+    },
+    {
+      "id": "interpretation",
+      "name": "Interpretation Engine",
+      "inputs": [
+        "selected object",
+        "validated placements/relationship graph",
+        "interpretation corpus"
+      ],
+      "outputs": [
+        "factual context",
+        "tradition-labeled interpretations"
+      ]
+    }
+  ],
+  "v1_features": [
+    "birth input",
+    "time zone resolution",
+    "ten primary astrological bodies",
+    "zodiac and houses",
+    "angles when time known",
+    "star catalogue (50-100 initially)",
+    "constellation display",
+    "major aspects",
+    "fixed-star conjunction classification",
+    "3D orbit/zoom/select",
+    "connection highlight/filter",
+    "three synchronized modes",
+    "object details",
+    "responsive layout",
+    "local processing"
+  ],
+  "major_aspects_degrees": {
+    "conjunction": 0,
+    "sextile": 60,
+    "square": 90,
+    "trine": 120,
+    "opposition": 180
+  },
+  "chart_preferences": {
+    "default_zodiac": "tropical",
+    "optional_zodiac": "sidereal",
+    "initial_house_system": "whole-sign",
+    "additional_house_system": "placidus",
+    "configurable_orbs": true
+  },
+  "star_examples": [
+    "Sirius",
+    "Regulus",
+    "Spica",
+    "Aldebaran",
+    "Antares"
+  ],
+  "integrity_constraints": [
+    "Distinguish observable sky positions from symbolic astrology",
+    "Declare celestial frame, epoch and calculation rules",
+    "Mark missing birth-time effects on house and chart-angle precision",
+    "Astrological connections are not physical forces or statistically established correlations",
+    "Do not conflate sidereal/tropical signs with constellation boundaries",
+    "Review data/software licenses before commercialization",
+    "Keep birth data local unless user explicitly agrees to sharing"
+  ],
+  "delivery_phases": [
+    "calculation foundation",
+    "3D scene",
+    "star correlations",
+    "three-mode interpretation experience",
+    "advanced features"
+  ],
+  "future_features": [
+    "2D wheel",
+    "local saving",
+    "exports",
+    "time machine",
+    "transits",
+    "synastry",
+    "heliocentric mode",
+    "cinematic tours",
+    "optional interpretation assistant"
+  ]
+}

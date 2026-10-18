@@ -1,0 +1,452 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Celestial Birth Atlas — Full Project Plan</title><style>
+:root{color-scheme:dark;--bg:#080d18;--surface:#111b2d;--stroke:#293754;--text:#eaf0fa;--muted:#adbbd3;--brand:#b4a2fb;--highlight:#55d0e0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{font:16px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(ellipse at 80% 0%,#1a2341 0,transparent 48%),var(--bg);color:var(--text);margin:0}
+main{max-width:1050px;margin:auto;padding:46px 38px 100px}h1{font-size:clamp(35px,6vw,58px);line-height:1.08;letter-spacing:-.04em;margin:0 0 8px}h2{font-size:clamp(25px,4vw,32px);line-height:1.25;margin-top:60px;border-bottom:1px solid var(--stroke);padding-bottom:14px}h3{font-size:21px;margin-top:30px;color:#c7d4ff}a{color:#8dddf3}a:hover{text-decoration:none}p,li{color:#d5deee}strong{color:#fff}blockquote{border-left:3px solid var(--highlight);padding-left:18px}li{margin:5px 0}table{width:100%;border-collapse:collapse;margin:20px 0 30px;font-size:14px}th{color:#e5d9ff;text-align:left;background:#17233b}td,th{padding:11px 12px;border:1px solid var(--stroke);vertical-align:top}tr:nth-child(even) td{background:#0e1728}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--surface);padding:16px;border-radius:10px}code{color:#a8eff4}hr{border:0;border-top:1px solid var(--stroke);margin:32px 0}.masthead{background:linear-gradient(145deg,#151c36,#0f2440);padding:34px;border:1px solid #3d4e7e;border-radius:19px;margin:0 0 48px}.eyebrow{font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:#a8c5f4}.masthead p{color:#d2dcf3;margin:8px 0 0}.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:28px}.toolbar span{color:var(--muted);font-size:12px}.toolbar button{border:1px solid #6b79a9;background:#18243d;border-radius:9px;color:#eaf0fa;padding:9px 14px;cursor:pointer}.toolbar button:hover{background:#27385e}.toc{background:var(--surface);border:1px solid var(--stroke);border-radius:12px;padding:18px 24px;margin:32px 0}.toc p{margin:2px 0 8px;color:var(--brand);font-weight:700}.toc a{display:block;color:#c6d6f4;text-decoration:none;margin:4px 0}.toc a:hover{color:var(--highlight)}.feature-band{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 10px}.feature-band span{font-size:12px;color:#b8f1f6;border:1px solid #366e79;padding:5px 10px;border-radius:20px}.astro-visual{width:100%;border:1px solid #334773;border-radius:14px;display:block;margin-top:26px;background:#070d1c}.note{font-size:12px;color:var(--muted);margin-top:14px} @media(max-width:640px){main{padding:22px 18px 60px}.masthead{padding:24px 20px}table{display:block;overflow-x:auto}h2{margin-top:42px}}@media print{:root{color-scheme:light;--bg:#fff;--surface:#f4f6fa;--stroke:#d4d9e3;--text:#17243c;--muted:#57647b}body{background:#fff;color:#111}p,li,strong{color:#17243c}main{max-width:100%;padding:10px}.masthead{background:#edf1f8}.masthead p{color:#333}.toolbar{display:none}h2,h3{break-after:avoid}table{break-inside:avoid}th{background:#e5e9f3;color:#21304a}td{background:white!important}a{color:#095c8b}.toc{display:none}}
+</style></head><body><main><div class="toolbar"><span>Complete Product, Engine &amp; Feature Plan · Offline document</span><button type="button" onclick="window.print()">Print / Save as PDF</button></div><header class="masthead"><div class="eyebrow">Personalized 3D Astrology · Product Blueprint</div><h1>Celestial Birth Atlas</h1><p>Complete architecture, engines, features, correlation logic, interface and delivery phases.</p><div class="feature-band"><span>Seven engines</span><span>Three visualization modes</span><span>Birth-sky mapping</span><span>Fixed-star correlations</span><span>Single-page web app</span></div><svg class="astro-visual" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 290" role="img" aria-label="Concept diagram with Earth-centered natal wheel, star field, and connection edges"><defs><radialGradient id="halo"><stop stop-color="#353f80" stop-opacity=".7"/><stop offset="1" stop-color="#081024" stop-opacity="0"/></radialGradient></defs><rect width="880" height="290" rx="12" fill="#080f22"/><ellipse cx="425" cy="146" rx="270" ry="160" fill="url(#halo)"/><g opacity=".5" fill="#bcd1ff"><circle cx="101" cy="41" r="1.8"/><circle cx="156" cy="192" r="1.8"/><circle cx="241" cy="70" r="1"/><circle cx="307" cy="270" r="1.6"/><circle cx="503" cy="26" r="1.8"/><circle cx="577" cy="207" r="1.5"/><circle cx="714" cy="86" r="1.3"/><circle cx="805" cy="260" r="1.5"/><circle cx="746" cy="193" r="1"/><circle cx="667" cy="34" r="1.8"/></g><ellipse cx="440" cy="146" rx="182" ry="103" fill="none" stroke="#8499ce"/><ellipse cx="440" cy="146" rx="182" ry="103" fill="none" stroke="#d8b97c" stroke-dasharray="3 8" transform="rotate(38 440 146)"/><ellipse cx="440" cy="146" rx="182" ry="103" fill="none" stroke="#788ec3" transform="rotate(90 440 146)"/><ellipse cx="440" cy="146" rx="125" ry="125" fill="none" stroke="#aaa98d" stroke-dasharray="2 7"/><g stroke-width="2" fill="none"><path d="M325 90 554 82 580 178 390 225 325 90" stroke="#66d7d9"/><path d="M325 90 580 178M554 82 390 225" stroke="#e6aa87"/></g><g fill="#d6be83"><circle cx="325" cy="90" r="6"/><circle cx="554" cy="82" r="7"/><circle cx="580" cy="178" r="5"/><circle cx="390" cy="225" r="7"/></g><circle cx="440" cy="146" r="21" fill="#142c54" stroke="#9aadd6"/><circle cx="440" cy="146" r="10" fill="#8db6db"/><g font-family="Arial,sans-serif" fill="#c2d2f6" font-size="16"><text x="26" y="30">BIRTH SKY</text><text x="701" y="30">RELATIONSHIPS</text><text x="26" y="267" font-size="12" fill="#9baaca">CONCEPTUAL VISUALIZATION</text></g></svg><p class="note">Concept illustration: a schematic natal sphere. Planet positions and relationships are not real birth data.</p></header><nav class="toc"><p>Contents</p><a href="#section-1">Complete Product Plan — 3D Astrological Birth Chart &amp;amp; Celestial Star Mapping</a><a href="#section-2">1. Core Concept</a><a href="#section-3">2. Visual Direction</a><a href="#section-4">3. Required Application Engines</a><a href="#section-5">4. Feature Systems</a><a href="#section-6">5. Three Synchronized Visualization Modes</a><a href="#section-7">6. Correlation Engine and Visual Legend</a><a href="#section-8">7. Single-Page Interface Plan</a><a href="#section-9">8. Feature Roadmap</a><a href="#section-10">9. Five Delivery Phases</a><a href="#section-11">10. Essential Design and Scientific Integrity Requirements</a><a href="#section-12">11. Recommended First Release — V1.0</a><a href="#section-13">12. Handoff Notes for the Implementing System</a><a href="#section-14">13. Suggested Reference Sources (for Technical Evaluation)</a></nav><h1>Celestial Birth Atlas</h1>
+<h2 id="section-1">Complete Product Plan — 3D Astrological Birth Chart &amp; Celestial Star Mapping</h2>
+<p><strong>Deliverable type:</strong> Product, design, engine, and feature planning package<br />
+<strong>Target platform:</strong> Single-page HTML and JavaScript web application<br />
+<strong>Scope of this package:</strong> Planning and technical handoff only. It does <strong>not</strong> contain a functional application implementation.<br />
+<strong>Working title:</strong> Celestial Birth Atlas<br />
+<strong>Version:</strong> Plan 1.0 — October 2026</p>
+<hr />
+<h2 id="section-2">1. Core Concept</h2>
+<p>Create an immersive, interactive <strong>3D astrological universe personalized to an individual's exact birth date, time, and location</strong>. Instead of only a flat natal chart, the application creates an explorable celestial environment that shows how planets, zodiac placements, astrological houses, constellations, and notable fixed stars relate to the person's birth chart.</p>
+<p>The central experience integrates three distinct but synchronized layers:</p>
+<ol>
+<li><strong>Astronomical reality:</strong> The apparent positions of the Sun, Moon, planets, and stars at the specified birth time and location.</li>
+<li><strong>Astrological relationships:</strong> Zodiac signs, houses, planetary aspects, angles, and traditional fixed-star associations.</li>
+<li><strong>Personal interpretation:</strong> Tradition-specific interpretations of highlighted placements and relationships.</li>
+</ol>
+<p><strong>Guiding principle:</strong> Astronomical coordinates, traditional astrological conventions, and symbolic interpretations must be individually identifiable. An astrological association is not automatically a physically close grouping in the sky or a scientifically established causal relationship.</p>
+<p><strong>Signature interaction:</strong> Select a planet in the natal chart and illuminate its network of astrological connections throughout the 3D celestial sphere, with a concise explanation for each link.</p>
+<h2 id="section-3">2. Visual Direction</h2>
+<p>Design the product as a <strong>personal celestial observatory</strong> with a refined, dark, accessible aesthetic—not a generic horoscope website.</p>
+<ul>
+<li>Deep-blue or near-black space background with restrained star glow.</li>
+<li>Distinct zodiac, ecliptic, horizon, celestial equator, and house overlays.</li>
+<li>Selectable planetary markers, prominent stars, and constellation outlines.</li>
+<li>Illuminated aspect lines and optional 3D relationship arcs.</li>
+<li>Smooth orbiting, zooming, focusing, and layered exploration.</li>
+<li>A visible explanation of the currently active astronomical/astrological view and reference frame.</li>
+</ul>
+<p>The default view is an <strong>Earth-centered natal celestial visualization</strong> framed by a zodiac ring and informative planetary markers. When house boundaries or astrological aspect geometry are shown schematically, they must be labeled as chart overlays rather than literal physical structures.</p>
+<h2 id="section-4">3. Required Application Engines</h2>
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Engine</th>
+  <th>Main responsibility</th>
+  <th>Recommended approach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>Birth Data Engine</td>
+  <td>Birth date/time/location, geocoding, historical time zones, uncertainty handling</td>
+  <td>JavaScript, date/time and location datasets</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>Astronomical Engine</td>
+  <td>Ephemerides, planetary positions, coordinate systems and transformation</td>
+  <td>Astronomy Engine or licensed Swiss Ephemeris integration</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>Astrology Engine</td>
+  <td>Zodiac signs, houses, angles, planetary aspects, rulerships and configurations</td>
+  <td>Dedicated calculation layer with selectable conventions</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>Fixed-Star Engine</td>
+  <td>Real-star catalog, coordinate propagation and traditional fixed-star associations</td>
+  <td>Curated stellar catalog plus coordinate calculations</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>3D Universe Engine</td>
+  <td>Celestial sphere, star field, planets, labels, camera, graphic overlays</td>
+  <td>Three.js</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>Correlation Engine</td>
+  <td>Graph of natal planets, significant stars, aspects and chart angles</td>
+  <td>Custom configurable relationship analysis</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>Interpretation Engine</td>
+  <td>Contextual explanations of chart placements and relationships</td>
+  <td>Structured interpretive content, optional language assistant later</td>
+</tr>
+</tbody>
+</table>
+<h3>Engine 1 — Birth Data</h3>
+<p><strong>Inputs:</strong> date, exact local time, birthplace or coordinates, time zone history, daylight-saving status, and optional birth-time confidence.</p>
+<p><strong>Outputs:</strong> unambiguous timestamp, location coordinates, user-selected chart conventions, and a provenance/uncertainty record.</p>
+<p><strong>Feature requirements:</strong></p>
+<ul>
+<li>Birth date, birth time and location input with place lookup.</li>
+<li>Correct handling of historical time zones and daylight-saving rule changes.</li>
+<li>User override for special or disputed time zone records.</li>
+<li>Missing birth time workflow that explicitly marks angle and house results as uncertain or unavailable.</li>
+<li>Optional ability to save multiple profiles locally without an account.</li>
+</ul>
+<h3>Engine 2 — Astronomical Calculations</h3>
+<p><strong>Responsibilities:</strong> calculate apparent planetary positions and transformations required for natal and sky views.</p>
+<p><strong>Outputs:</strong> time-indexed positions, right ascension/declination, ecliptic longitude/latitude, appropriate reference frames and metadata.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto.</li>
+<li>Earth-based geocentric positions for the natal chart.</li>
+<li>Observer-based topocentric or horizontal coordinates for the localized sky view where appropriate.</li>
+<li>Explicit handling of precession, equinox/reference epoch, and coordinate convention.</li>
+<li>Planetary apparent retrograde status for the selected astrology convention.</li>
+<li>Validation against trusted ephemeris reference cases.</li>
+</ul>
+<p><strong>Potential libraries:</strong> Astronomy Engine is convenient for browser-based astronomical calculations. Swiss Ephemeris is a specialized alternative whose integration method and licensing must be resolved before a commercial release. The plan does not mandate either vendor.</p>
+<h3>Engine 3 — Astrology Rules</h3>
+<p><strong>Responsibilities:</strong> convert astronomical positions into chart placements and symbolic angular relationships.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Tropical zodiac as initial default; optional sidereal mode with a documented ayanamsa.</li>
+<li>House system options: Whole Sign initially, Placidus as an additional choice, with limitations disclosed for locations where certain systems cannot be calculated reliably.</li>
+<li>Ascendant, Midheaven, IC, Descendant, and other relevant angles.</li>
+<li>Sign degrees, house placements, chart ruler, traditional/modern rulership mappings.</li>
+<li>Major planetary aspects and configurable orbs.</li>
+<li>Stelliums, aspect configurations and angularity detections.</li>
+<li>Consistent and testable handling of cusp and near-boundary cases.</li>
+</ul>
+<h3>Engine 4 — Fixed Stars and Constellations</h3>
+<p><strong>Responsibilities:</strong> plot real stars correctly and separately classify traditional fixed-star astrological relationships.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>First release: curated catalog of ~50–100 notable stars, including Sirius, Regulus, Spica, Aldebaran, and Antares.</li>
+<li>Real sky coordinates and apparent brightness; star names and constellation references.</li>
+<li>Coordinate transformations and epoch/precession treatment appropriate to the natal date.</li>
+<li>Optional catalog expansion for much denser star rendering.</li>
+<li>Traditional fixed-star association rules with configurable longitude-based orbs.</li>
+<li>Display of <strong>true angular separation in the sky</strong> alongside any purely astrological longitude separation.</li>
+<li>Constellation line drawings, labels, and optional mythology/information.</li>
+</ul>
+<p><strong>Data/legal note:</strong> Review source-specific attribution, redistribution, and commercial-use rights for stellar catalogs before bundling them in a public product.</p>
+<h3>Engine 5 — 3D Universe Renderer</h3>
+<p><strong>Responsibilities:</strong> one responsive WebGL scene containing the selected sky, chart overlays, and highlighted relationship network.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Full 360-degree camera rotation and touch navigation.</li>
+<li>Zoom-to-focus for stars, planets, signs and connection clusters.</li>
+<li>Layer controls for star field, constellations, labels, celestial guides, zodiac, houses, aspects and relation network.</li>
+<li>Selected-object emphasis and dimming of unrelated elements.</li>
+<li>GPU-efficient points/instancing for stars, level-of-detail, adaptive rendering for mobile.</li>
+<li>Readable object labels and hover/click/tap targets.</li>
+<li>Optional cinematic camera tours after core interactions work reliably.</li>
+</ul>
+<p><strong>Recommended visualization framework:</strong> Three.js, with a stable browser fallback and progressive rendering quality levels.</p>
+<h3>Engine 6 — Correlation / Relationship Graph</h3>
+<p><strong>Responsibilities:</strong> identify and rank qualifying relationships for user exploration. Here, “correlation” means <strong>symbolic/geometry-based chart relationship</strong>, not a statistical Pearson correlation or evidence of causality.</p>
+<p><strong>Node types:</strong> planets, Sun/Moon, fixed stars, zodiac signs, houses, chart angles, recognized aspect patterns.</p>
+<p><strong>Edge types:</strong></p>
+<ul>
+<li>Planet–planet aspect.</li>
+<li>Planet–star traditional conjunction.</li>
+<li>Planet–sign placement and sign rulership.</li>
+<li>Planet–house placement.</li>
+<li>Planet/star-to-chart-angle proximity.</li>
+<li>Higher-order structures such as stelliums or aspect formations.</li>
+</ul>
+<p><strong>Edge metadata:</strong> category, reference system, angular measure, chosen orb, deviation from exactness, relevant calculation date, interpretive tradition, confidence/completeness, and presentation style.</p>
+<p><strong>Interaction behavior:</strong> Selecting Jupiter, for example, dims unconnected objects and highlights only Jupiter-related edges, optionally sorted by aspect category or closeness. Every displayed connection should be explorable and explainable.</p>
+<h3>Engine 7 — Interpretation Content</h3>
+<p><strong>Responsibilities:</strong> present contextual, clearly attributed and non-deterministic interpretations for natal placements and relationships.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Short summary card for every major object and connection.</li>
+<li>Long-form explanation upon expansion.</li>
+<li>Consistent terminology depending on chosen astrology tradition.</li>
+<li>Separate factual astronomy from traditional symbolic interpretations.</li>
+<li>Source/provenance fields for editorial content; avoid unsupported precision.</li>
+<li>Optional AI narration later, grounded in already computed chart data and trusted interpretation records.</li>
+</ul>
+<h2 id="section-5">4. Feature Systems</h2>
+<h3>A. Personalized Celestial Generation</h3>
+<ul>
+<li>Custom birth date, time and place entry.</li>
+<li>Natal positions of the 10 principal bodies used by modern western astrology.</li>
+<li>Zodiac and house overlays.</li>
+<li>Ascendant, Midheaven, IC, Descendant.</li>
+<li>Planet degrees and retrograde indicator.</li>
+<li>Tropical/sidereal convention selection; initial house system options.</li>
+<li>Missing-time mode with clearly signaled limitations.</li>
+</ul>
+<h3>B. 3D Fixed-Star and Constellation Mapping</h3>
+<ul>
+<li>Apparent stellar directions for the natal epoch.</li>
+<li>Bright-star visualization, constellation outlines and labels.</li>
+<li>Fixed stars with traditional astrological importance.</li>
+<li>Highlighted links to selected natal bodies where qualification rules are met.</li>
+<li>Search, object details, brightness and coordinates.</li>
+<li>Optional cultural/mythological descriptions.</li>
+</ul>
+<h3>C. Planetary and Stellar Connection Network</h3>
+<ul>
+<li>Major aspects: conjunction, sextile, square, trine, opposition.</li>
+<li>Adjustable orb thresholds and per-relationship filters.</li>
+<li>Fixed-star longitude conjunction detection (separate from true sky separation).</li>
+<li>Rulerships, angularity, sign/house associations and notable configurations.</li>
+<li>Highlight and isolate the network of the selected object.</li>
+<li>Inspect why each link qualifies; no unexplained “mystery score.”</li>
+</ul>
+<h3>D. Interactive 3D Exploration</h3>
+<ul>
+<li>Orbit, pan, zoom, touch controls, reset view and focus.</li>
+<li>Search/select celestial objects.</li>
+<li>Show/hide constellation lines, labels, zodiac rings, houses and aspects.</li>
+<li>Object details panel and optional camera fly-to.</li>
+<li>Designed for mouse, touch, keyboard and screen readers where possible.</li>
+</ul>
+<h2 id="section-6">5. Three Synchronized Visualization Modes</h2>
+<h3>Mode 1 — Natal Constellation Wheel</h3>
+<p>A three-dimensional interpretation of the classic natal chart, emphasizing houses, zodiac sections, bodies and aspect geometry. It is a <strong>schematic astrological chart</strong>, not a physically scaled planetary model.</p>
+<h3>Mode 2 — Birth Sky Observatory</h3>
+<p>A reconstruction of the local sky at the birth moment, with accurate sight directions for planets and stars. Include horizon, celestial equator, ecliptic and constellation outlines as appropriate. Make above- vs below-horizon states obvious.</p>
+<h3>Mode 3 — Cosmic Connection Network</h3>
+<p>A graph-oriented visualization of relationships between planets, fixed stars, zodiac and houses. Lines are <strong>information edges</strong>, not claims of physical beams or forces.</p>
+<p>All modes use the same natal dataset and preserve the current object selection when switching.</p>
+<h2 id="section-7">6. Correlation Engine and Visual Legend</h2>
+<table>
+<thead>
+<tr>
+  <th>Relationship</th>
+  <th style="text-align:right">Approximate nominal angle</th>
+  <th>Proposed visual style</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Conjunction</td>
+  <td style="text-align:right">0°</td>
+  <td>Gold luminous line</td>
+</tr>
+<tr>
+  <td>Sextile</td>
+  <td style="text-align:right">60°</td>
+  <td>Blue line</td>
+</tr>
+<tr>
+  <td>Square</td>
+  <td style="text-align:right">90°</td>
+  <td>Red line</td>
+</tr>
+<tr>
+  <td>Trine</td>
+  <td style="text-align:right">120°</td>
+  <td>Green line</td>
+</tr>
+<tr>
+  <td>Opposition</td>
+  <td style="text-align:right">180°</td>
+  <td>Purple line</td>
+</tr>
+<tr>
+  <td>Planet–fixed-star traditional conjunction</td>
+  <td style="text-align:right">Configurable ecliptic longitude criterion</td>
+  <td>White/cyan beam</td>
+</tr>
+<tr>
+  <td>Connection to chart angle</td>
+  <td style="text-align:right">Configurable</td>
+  <td>Dashed bright line</td>
+</tr>
+</tbody>
+</table>
+<p>Visual styles must be user-customizable and should not rely on color alone. Add patterns or line styles for accessibility.</p>
+<p><strong>Key distinction:</strong> An ecliptic-longitude match used in fixed-star astrology can occur even when the objects are not visibly adjacent in the sky. The detail panel should show both measurements when available, and each relationship should state the rule it uses.</p>
+<h2 id="section-8">7. Single-Page Interface Plan</h2>
+<h3>Desktop composition</h3>
+<ul>
+<li><strong>Header:</strong> product title, profile, selected date/time, settings, optional save/export.</li>
+<li><strong>Left panel:</strong> birth inputs, active mode, constellation and calculation settings, layer visibility.</li>
+<li><strong>Center canvas:</strong> persistent Three.js celestial scene and minimal contextual controls.</li>
+<li><strong>Right panel:</strong> selected object, coordinates/placement, associations, aspect list and interpretations.</li>
+<li><strong>Bottom mini-timeline (later):</strong> birth moment versus transits or other time steps.</li>
+</ul>
+<h3>Mobile composition</h3>
+<ul>
+<li>Large central scene with floating mode switcher.</li>
+<li>Collapsible bottom sheet for object details.</li>
+<li>Drawer for birth information, layer toggles and settings.</li>
+<li>Touch-first picking and large enough interactive markers.</li>
+</ul>
+<h3>Primary user journey</h3>
+<ol>
+<li>Enter birth date/time/location; choose default conventions.</li>
+<li>Generate natal data and open the 3D chart.</li>
+<li>Rotate, zoom, and inspect planetary markers.</li>
+<li>Select a planet to light up qualifying connections.</li>
+<li>Inspect an aspect or fixed-star connection for method, precision and interpretation.</li>
+<li>Switch between Natal Wheel, Birth Sky and Connection Network without losing selection.</li>
+<li>Optionally save/export the chart.</li>
+</ol>
+<h2 id="section-9">8. Feature Roadmap</h2>
+<table>
+<thead>
+<tr>
+  <th>Priority</th>
+  <th>Capability</th>
+  <th>Release intent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>High</td>
+  <td>Natal chart generation</td>
+  <td>V1</td>
+</tr>
+<tr>
+  <td>High</td>
+  <td>3D celestial sphere</td>
+  <td>V1</td>
+</tr>
+<tr>
+  <td>High</td>
+  <td>Zodiac/house overlays</td>
+  <td>V1</td>
+</tr>
+<tr>
+  <td>High</td>
+  <td>Major planetary aspects</td>
+  <td>V1</td>
+</tr>
+<tr>
+  <td>High</td>
+  <td>Curated fixed-star mapping</td>
+  <td>V1</td>
+</tr>
+<tr>
+  <td>High</td>
+  <td>Object inspection</td>
+  <td>V1</td>
+</tr>
+<tr>
+  <td>High</td>
+  <td>Three synchronized views</td>
+  <td>V1</td>
+</tr>
+<tr>
+  <td>Medium</td>
+  <td>Conventional 2D natal reference overlay</td>
+  <td>V1.1</td>
+</tr>
+<tr>
+  <td>Medium</td>
+  <td>Time machine</td>
+  <td>V1.1</td>
+</tr>
+<tr>
+  <td>Medium</td>
+  <td>Natal-vs-current transits</td>
+  <td>V1.2</td>
+</tr>
+<tr>
+  <td>Medium</td>
+  <td>Image and chart export</td>
+  <td>V1.1</td>
+</tr>
+<tr>
+  <td>Medium</td>
+  <td>Local saved birth profiles</td>
+  <td>V1.1</td>
+</tr>
+<tr>
+  <td>Low</td>
+  <td>Synastry comparison</td>
+  <td>V2</td>
+</tr>
+<tr>
+  <td>Low</td>
+  <td>Alternative heliocentric astronomical exploration</td>
+  <td>V2</td>
+</tr>
+<tr>
+  <td>Low</td>
+  <td>Cinematic camera journeys</td>
+  <td>V2</td>
+</tr>
+<tr>
+  <td>Low</td>
+  <td>Natural-language interpretation assistant</td>
+  <td>V2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="section-10">9. Five Delivery Phases</h2>
+<h3>Phase 1 — Natal/Astronomical Foundation</h3>
+<p>Establish birth inputs, historical time handling, ephemerides, coordinate transformations, sign/house logic and reference-case validation.</p>
+<p><strong>Exit condition:</strong> multiple test charts reproduce agreed reference positions and correctly flag incomplete birth times.</p>
+<h3>Phase 2 — Interactive 3D Universe</h3>
+<p>Create the navigable star field, planetary markers, chart overlays, camera controls and object picker.</p>
+<p><strong>Exit condition:</strong> user can navigate a valid natal scene smoothly on desktop and representative mobile hardware.</p>
+<h3>Phase 3 — Stellar Correlations</h3>
+<p>Introduce curated fixed stars, connection classification and graph filtering, with transparent edge calculation rules.</p>
+<p><strong>Exit condition:</strong> selecting a planet reliably lists and highlights exactly the same relationships across visual and detail views.</p>
+<h3>Phase 4 — Interpretation and Three-Mode Experience</h3>
+<p>Create explanatory object cards, traditions/setting labels, Natal Wheel, Birth Sky and Connection Network mode synchronization.</p>
+<p><strong>Exit condition:</strong> users can understand the distinction between symbolic aspects and actual sky proximity.</p>
+<h3>Phase 5 — Advanced Experience</h3>
+<p>Extend to saved charts, exports, time travel, current transits, accessibility polish, and optional comparison modes.</p>
+<p><strong>Exit condition:</strong> the app can save/share useful outcomes without compromising birth-data privacy.</p>
+<h2 id="section-11">10. Essential Design and Scientific Integrity Requirements</h2>
+<ol>
+<li><strong>Coordinate integrity:</strong> Clearly declare time scale, reference epoch, zodiac convention and geocentric/topocentric context for every position and overlay.</li>
+<li><strong>Scale clarity:</strong> Symbolic zodiac/houses/aspect lines are never misrepresented as physically sized 3D distances.</li>
+<li><strong>Time accuracy:</strong> Account for historical local clock rules; unknown birth times must not produce unjustified precise Ascendants/houses.</li>
+<li><strong>Framework clarity:</strong> Tropical signs, sidereal signs and astronomical constellations are distinct systems.</li>
+<li><strong>Performance:</strong> Begin with curated stars; add large catalogs only when frame-time budget allows.</li>
+<li><strong>Privacy:</strong> Default to client-side birth processing and local storage; no backend is necessary for the first release.</li>
+<li><strong>Interpretation integrity:</strong> Present astrological meaning as traditional/symbolic, not scientifically proven causation or prediction.</li>
+<li><strong>Licensing:</strong> Verify licenses for ephemeris software, place data, fonts, imagery and star catalogs before redistribution or commercial use.</li>
+<li><strong>Accessibility:</strong> Preserve meaningful interaction without reliance on specific colors, tiny visual targets or animation.</li>
+</ol>
+<h2 id="section-12">11. Recommended First Release — V1.0</h2>
+<p><strong>Personal Celestial Atlas:</strong> A complete browser-based experience generating one person's birth-chart sky and its highlighted traditional relationships.</p>
+<p>Minimum feature set:</p>
+<ul>
+<li>Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune and Pluto natal positions.</li>
+<li>Zodiac and twelve-house structure, with time-uncertainty handling.</li>
+<li>Fully rotatable/zoomable 3D celestial interface.</li>
+<li>Catalog of approximately 50–100 notable stars.</li>
+<li>Major planet-to-planet aspect calculations.</li>
+<li>Traditional planet-to-fixed-star conjunction detection.</li>
+<li>Inspectable connection lines and object explanations.</li>
+<li>Three synchronized view modes.</li>
+<li>Mobile-responsive single-page shell.</li>
+</ul>
+<p><strong>Primary success criterion:</strong> Selecting any natal planet reveals a consistent, explainable and visually legible network of its significant natal relationships.</p>
+<h2 id="section-13">12. Handoff Notes for the Implementing System</h2>
+<ul>
+<li>Deliver a <strong>single-page HTML/JavaScript experience</strong>; a bundler and split source files are permissible during development, but the shipped experience should behave as one page.</li>
+<li>Keep the seven engines independently testable and connected by stable data contracts.</li>
+<li>Start from precise calculations; visualizations consume data rather than generating astronomical values themselves.</li>
+<li>Represent each relationship with a rule ID, explicit angle/orb fields and the active reference convention.</li>
+<li>Preserve object IDs and selected state when moving between the three views.</li>
+<li>Define a clear lower-performance rendering path for mobile/older browsers.</li>
+<li>Keep natal data private by default.</li>
+<li>Avoid introducing accounts, AI APIs or a server as mandatory dependencies for V1.</li>
+<li>Treat all sample visuals as art direction, not scientific figures.</li>
+</ul>
+<h2 id="section-14">13. Suggested Reference Sources (for Technical Evaluation)</h2>
+<ul>
+<li>Three.js: https://threejs.org/</li>
+<li>Astronomy Engine: https://github.com/cosinekitty/astronomy</li>
+<li>Swiss Ephemeris and licensing information: https://www.astro.com/swisseph/</li>
+<li>ESA Gaia mission: https://www.cosmos.esa.int/web/gaia</li>
+<li>ESA Hipparcos catalogue: https://www.cosmos.esa.int/web/hipparcos</li>
+</ul>
+<p>These are starting points for evaluation, not endorsements or guarantees of license compatibility. Confirm current project documentation and terms during implementation.</p>
+<footer class="note">Planning document only — no working 3D application code included.</footer></main></body></html>

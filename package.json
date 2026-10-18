@@ -1,0 +1,10 @@
+{
+  "name": "celestial-birth-atlas",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/run.mjs",
+    "serve": "python3 -m http.server 8000",
+    "build-data": "python3 scripts/build-data.py"
+  }
+}

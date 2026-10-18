@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Celestial Birth Atlas</title>
+<meta name="description" content="A 3D birth chart built on real astronomy: VSOP87 planet positions and Hipparcos/HYG stars, with every astrological rule explained.">
+<link rel="stylesheet" href="styles/app.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='13' fill='none' stroke='%23f2c14e' stroke-width='2'/><circle cx='16' cy='16' r='4' fill='%23f2c14e'/><circle cx='25' cy='10' r='2' fill='%237fe7ff'/></svg>">
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js" } }</script>
+</head>
+<body>
+
+<header class="topbar">
+  <button type="button" class="icon-btn only-mobile" id="open-left" aria-label="Birth data and settings" data-tip="Birth data, chart settings and layers">☰</button>
+  <div class="brand" data-tip="g:wheel">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">Celestial Birth Atlas</span>
+  </div>
+
+  <nav class="modes" role="tablist" aria-label="Visualization mode">
+    <button type="button" role="tab" class="mode-btn is-active" data-mode="wheel" data-tip="mode:wheel">◎ <span>Natal Wheel</span></button>
+    <button type="button" role="tab" class="mode-btn" data-mode="sky" data-tip="mode:sky">◠ <span>Birth Sky</span></button>
+    <button type="button" role="tab" class="mode-btn" data-mode="network" data-tip="mode:network">⋰ <span>Connections</span></button>
+  </nav>
+
+  <div class="chips" id="convention-chips" aria-label="Active conventions"></div>
+
+  <div class="obj-search">
+    <label class="sr-only" for="object-search">Find an object</label>
+    <input id="object-search" type="search" placeholder="Find planet, star, sign…" autocomplete="off" spellcheck="false" data-tip="Search the chart's planets, fixed stars, signs, houses and constellations. Selecting one highlights its connections and flies the camera to it.">
+    <div id="object-results" class="dropdown" role="listbox"></div>
+  </div>
+  <button type="button" class="icon-btn" id="help-btn" aria-label="How to read this" data-tip="How to read this app, and what is astronomy versus tradition">?</button>
+  <button type="button" class="icon-btn only-mobile" id="open-right" aria-label="Chart details" data-tip="Chart details and object inspector">ⓘ</button>
+</header>
+
+<main class="layout">
+  <!-- LEFT: birth data, settings, layers -->
+  <aside class="panel panel-left" id="panel-left" aria-label="Birth data and settings">
+    <section class="card">
+      <h2>Birth data <span class="info" data-tip="Everything is calculated in your browser. Birth details are never uploaded.">ⓘ</span></h2>
+      <form id="birth-form" autocomplete="off">
+        <label class="field"><span>Name <em>(optional)</em></span><input id="f-name" type="text" maxlength="60"></label>
+        <div class="row2">
+          <label class="field"><span>Date <span class="info" data-tip="Gregorian calendar date as recorded on the birth certificate, local to the birthplace. Supported range 1700–2200.">ⓘ</span></span><input id="f-date" type="date" min="1700-01-01" max="2200-12-31" required></label>
+          <label class="field"><span>Local time <span class="info" data-tip="Clock time at the birthplace. Converted to UTC using the historical time-zone rules in force on that date.">ⓘ</span></span><input id="f-time" type="time" step="60"></label>
+        </div>
+        <label class="check"><input id="f-time-unknown" type="checkbox"><span>Birth time unknown</span> <span class="info" data-tip="g:timeUnknown">ⓘ</span></label>
+
+        <label class="field place-field"><span>Birthplace <span class="info" data-tip="Offline gazetteer of 34,000 places (GeoNames, population ≥ 15,000) with their IANA time zones. Type a city, optionally followed by a comma and a country or region.">ⓘ</span></span>
+          <input id="f-place" type="search" placeholder="e.g. Ulm, Germany" spellcheck="false">
+          <div id="place-results" class="dropdown" role="listbox"></div>
+        </label>
+
+        <details class="advanced">
+          <summary data-tip="Enter exact coordinates or override the time zone for unusual historical records.">Coordinates &amp; time zone</summary>
+          <div class="row2">
+            <label class="field"><span>Latitude <span class="info" data-tip="Degrees north (+) or south (−). Latitude shapes the Ascendant and house sizes.">ⓘ</span></span><input id="f-lat" type="number" step="0.0001" min="-89.99" max="89.99"></label>
+            <label class="field"><span>Longitude <span class="info" data-tip="Degrees east (+) or west (−). Longitude converts Greenwich sidereal time into local sidereal time.">ⓘ</span></span><input id="f-lon" type="number" step="0.0001" min="-180" max="180"></label>
+          </div>
+          <label class="field"><span>Time zone (IANA) <span class="info" data-tip="g:dst">ⓘ</span></span><select id="f-tz"></select></label>
+          <label class="field"><span>Manual UTC offset <em>(overrides zone)</em> <span class="info" data-tip="For disputed records, war time, or Local Mean Time. Format +05:30 or −04:00. Leave blank to use the zone's historical rules.">ⓘ</span></span><input id="f-offset" type="text" placeholder="e.g. +01:00" pattern="[+\-−]?\d{1,2}(:\d{2}(:\d{2})?)?"></label>
+          <label class="field"><span>If the time occurred twice <span class="info" data-tip="When clocks fall back, one local hour happens twice. Choose which one the record means.">ⓘ</span></span>
+            <select id="f-ambig"><option value="earlier">First occurrence (daylight time)</option><option value="later">Second occurrence (standard time)</option></select></label>
+        </details>
+
+        <div class="btn-row">
+          <button type="submit" class="primary" data-tip="Recalculate every position, house and relationship for these birth details.">Cast chart</button>
+          <button type="button" id="btn-now" class="ghost" data-tip="Use the current moment at the selected place — a chart of the sky right now.">Now</button>
+          <button type="button" id="btn-example" class="ghost" data-tip="Load a published reference chart (Albert Einstein, AstroDatabank rating AA) to compare against other software.">Example</button>
+        </div>
+      </form>
+      <div id="resolution" class="resolution" aria-live="polite"></div>
+    </section>
+
+    <section class="card">
+      <details open>
+        <summary><h2>Chart conventions</h2></summary>
+        <label class="field"><span>Zodiac <span class="info" data-tip="g:tropical">ⓘ</span></span>
+          <select id="s-zodiac" data-setting="zodiac">
+            <option value="tropical">Tropical (Western)</option>
+            <option value="lahiri">Sidereal — Lahiri</option>
+            <option value="fagan">Sidereal — Fagan/Bradley</option>
+          </select></label>
+        <label class="field"><span>House system <span class="info" data-tip="g:houseSystem">ⓘ</span></span>
+          <select id="s-houses" data-setting="houseSystem">
+            <option value="whole-sign">Whole Sign</option>
+            <option value="placidus">Placidus</option>
+            <option value="equal">Equal</option>
+            <option value="porphyry">Porphyry</option>
+          </select></label>
+        <label class="field"><span>Rulerships <span class="info" data-tip="g:modernRulers">ⓘ</span></span>
+          <select id="s-rulers" data-setting="modernRulers">
+            <option value="true">Modern (Uranus, Neptune, Pluto)</option>
+            <option value="false">Traditional (seven visible planets)</option>
+          </select></label>
+        <label class="check"><input type="checkbox" data-setting="includeNodes"><span>Aspects to the North Node</span> <span class="info" data-tip="g:node">ⓘ</span></label>
+      </details>
+    </section>
+
+    <section class="card">
+      <details>
+        <summary><h2>Orbs</h2> <span class="info" data-tip="g:orb">ⓘ</span></summary>
+        <div id="orb-sliders"></div>
+        <label class="slider"><span data-tip="g:luminaryBonus">Sun/Moon bonus</span><input type="range" min="0" max="4" step="0.5" data-setting="luminaryBonus"><output></output></label>
+        <label class="slider"><span data-tip="g:angularity">Angles &amp; nodes</span><input type="range" min="1" max="10" step="0.5" data-setting="angleOrb"><output></output></label>
+        <hr>
+        <label class="slider"><span data-tip="Maximum distance for a planet or angle to count as joined with a fixed star. Tradition uses about 1°, sometimes more for the brightest stars.">Fixed-star orb</span><input type="range" min="0.25" max="3" step="0.25" data-setting="starOrb"><output></output></label>
+        <label class="check"><input type="checkbox" data-setting="starOrbByMag"><span>Wider orb for bright stars</span> <span class="info" data-tip="×2 for magnitude < 1, ×1.5 for magnitude < 2.">ⓘ</span></label>
+        <label class="field"><span>Fixed-star rule <span class="info" data-tip="g:fixedStarRule">ⓘ</span></span>
+          <select data-setting="starRule">
+            <option value="longitude">Ecliptic longitude (traditional)</option>
+            <option value="sky">True sky separation</option>
+          </select></label>
+      </details>
+    </section>
+
+    <section class="card">
+      <details>
+        <summary><h2>Layers</h2></summary>
+        <div class="layer-grid" id="layer-toggles"></div>
+        <label class="slider"><span data-tip="Faintest star drawn. 6.5 is the naked-eye limit under dark skies; lower it on slow devices.">Star limit (mag)</span><input type="range" min="3" max="6.5" step="0.5" data-setting="magLimit"><output></output></label>
+      </details>
+    </section>
+
+    <section class="card">
+      <details>
+        <summary><h2>Relationship filters</h2> <span class="info" data-tip="g:network">ⓘ</span></summary>
+        <div class="layer-grid" id="edge-filters"></div>
+      </details>
+    </section>
+
+    <section class="card">
+      <details>
+        <summary><h2>Saved charts</h2> <span class="info" data-tip="Saved only in this browser's local storage. Nothing is sent anywhere. Clearing site data deletes them.">ⓘ</span></summary>
+        <div class="btn-row"><button type="button" id="btn-save" class="ghost">Save this chart</button><button type="button" id="btn-export" class="ghost" data-tip="Download the computed chart (positions, houses, aspects, star contacts, settings) as JSON.">Export JSON</button><button type="button" id="btn-png" class="ghost" data-tip="Download an image of the current 3D view.">PNG</button></div>
+        <ul id="profiles" class="profiles"></ul>
+      </details>
+    </section>
+
+    <footer class="credits">
+      Ephemeris: <a href="https://github.com/cosinekitty/astronomy" target="_blank" rel="noopener" data-tip="g:vsop">Astronomy Engine</a> ·
+      Stars: <a href="https://github.com/astronexus/HYG-Database" target="_blank" rel="noopener" data-tip="g:hyg">HYG v4.1</a> ·
+      Constellations: IAU via d3-celestial ·
+      Places: <a href="https://www.geonames.org/" target="_blank" rel="noopener">GeoNames</a> (CC BY)
+    </footer>
+  </aside>
+
+  <!-- CENTER: 3D -->
+  <section class="stage" id="stage" aria-label="3D celestial view">
+    <div class="mode-banner" id="mode-banner"></div>
+    <div class="stage-tools">
+      <button type="button" class="icon-btn" id="zoom-in" aria-label="Zoom in" data-tip="Zoom in (scroll or pinch also works)">+</button>
+      <button type="button" class="icon-btn" id="zoom-out" aria-label="Zoom out" data-tip="Zoom out">−</button>
+      <button type="button" class="icon-btn" id="focus-btn" aria-label="Focus selection" data-tip="Fly the camera to the selected object">◎</button>
+      <button type="button" class="icon-btn" id="reset-btn" aria-label="Reset" data-tip="Reset camera, clear the selection and restore relationship filters (Esc)">⟲</button>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="hover-hint" id="hover-hint">Hover anything for an explanation · click to select · drag to rotate</div>
+  </section>
+
+  <!-- RIGHT: inspector -->
+  <aside class="panel panel-right" id="panel-right" aria-label="Chart details">
+    <div class="tabs" role="tablist">
+      <button type="button" class="tab is-active" data-tab="details" data-tip="The selected object: facts, connections and traditional meaning">Details</button>
+      <button type="button" class="tab" data-tab="planets" data-tip="Every placement in the chart, with signs, houses and dignities">Placements</button>
+      <button type="button" class="tab" data-tab="aspects" data-tip="g:aspect">Aspects</button>
+      <button type="button" class="tab" data-tab="stars" data-tip="g:fixedStar">Stars</button>
+      <button type="button" class="tab" data-tab="wheel" data-tip="A conventional flat chart wheel drawn from the same data">Wheel</button>
+      <button type="button" class="tab" data-tab="math" data-tip="Step-by-step: how this chart was calculated, with the actual numbers">Math</button>
+    </div>
+    <div class="tab-panel is-active" data-tab="details" id="tab-details"></div>
+    <div class="tab-panel" data-tab="planets" id="tab-planets"></div>
+    <div class="tab-panel" data-tab="aspects" id="tab-aspects"></div>
+    <div class="tab-panel" data-tab="stars" id="tab-stars"></div>
+    <div class="tab-panel" data-tab="wheel" id="tab-wheel"><svg id="wheel2d" class="wheel2d" role="img" aria-label="2D natal chart wheel"></svg><p class="hint">Hover any segment, planet, cusp or line. This flat wheel and the 3D views share one calculation.</p></div>
+    <div class="tab-panel" data-tab="math" id="tab-math"></div>
+  </aside>
+</main>
+
+<footer class="statusbar" id="statusbar"></footer>
+
+<dialog id="help" class="help">
+  <form method="dialog"><button class="icon-btn close" aria-label="Close">✕</button></form>
+  <h2>How to read the Celestial Birth Atlas</h2>
+  <div class="help-grid">
+    <div><h3><span class="tag tag-fact">Astronomy</span> what was really there</h3>
+      <p>Planet positions are computed with Astronomy Engine (VSOP87, IAU precession and nutation) for the exact UTC instant of birth. The 8,920 background stars and 68 fixed stars are real Hipparcos/HYG catalogue entries, moved by their measured proper motion to the birth year and precessed to the equinox of date.</p>
+      <p>The <b>Birth Sky</b> view shows true directions from the birthplace. The ground is translucent so you can see what was below the horizon.</p></div>
+    <div><h3><span class="tag tag-lore">Tradition</span> what astrology reads into it</h3>
+      <p>Signs, houses, aspects, rulerships and fixed-star "natures" are conventions of Western astrology. They are shown with the rule that produced them, but they are symbolic: no physical force or statistically established effect is implied.</p>
+      <p>The <b>Natal Wheel</b> and <b>Connections</b> views are schematic. Lines are information, not beams.</p></div>
+    <div><h3>Three things that surprise people</h3>
+      <ul>
+        <li>Tropical signs are ~24° out of step with the constellations of the same name, because of precession.</li>
+        <li>A "conjunction" with a fixed star is usually measured in longitude only. Sirius can be "conjunct" a planet while 40° away on the sky. The Stars tab shows both numbers.</li>
+        <li>Houses depend on the birth minute: the Ascendant moves about 1° every 4 minutes.</li>
+      </ul></div>
+    <div><h3>Controls</h3>
+      <ul>
+        <li>Drag to rotate, scroll or pinch to zoom, right-drag to pan.</li>
+        <li>Click a planet to light up its network. Click empty space to clear.</li>
+        <li>Hover anything (or tap ⓘ on touch screens) for an explanation.</li>
+        <li><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> switch modes · <kbd>Esc</kbd> clears the selection.</li>
+      </ul></div>
+  </div>
+</dialog>
+
+<div id="loading" class="loading"><div><div class="spinner"></div><p id="loading-msg">Loading star catalogue…</p></div></div>
+
+<script type="module" src="src/app.js"></script>
+</body>
+</html>
